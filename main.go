@@ -22,7 +22,10 @@ func main() {
 	config := dropbox.Config{Token: os.Getenv("DROPBOX_TOKEN")}
 	f := files.New(config)
 
-	res := must(f.ListFolder(files.NewListFolderArg("")))
+	res, err := f.ListFolder(files.NewListFolderArg(""))
+	if err != nil {
+		log.Fatal(err)
+	}
 	names := make([]string, 0)
 
 	for _, f := range res.Entries {
@@ -44,11 +47,4 @@ func main() {
 	if names[len(names)-1] != filename {
 		log.Fatalf("today's backup is missing!")
 	}
-}
-
-func must[T any](thing T, err error) T {
-	if err != nil {
-		panic(err)
-	}
-	return thing
 }
