@@ -45,7 +45,7 @@ func main() {
 
 	sort.Strings(names)
 	now := time.Now()
-	filename := fmt.Sprintf("onramp_production_%v%02d%02d.sql.gz", now.Year(), now.Month(), now.Day())
+	filename := fmt.Sprintf("onramp_production_%v%02d%02d.sql.gpg.gz", now.Year(), now.Month(), now.Day())
 
 	if names[len(names)-1] != filename {
 		err := slack.PostWebhook(os.Getenv("SLACK_WEBHOOK_URL"), &slack.WebhookMessage{
